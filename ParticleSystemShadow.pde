@@ -6,35 +6,28 @@ Particle particle;
 ArrayList<Particle> particleList;
 
 void setup() {
-  size(600, 600, P3D);
+  size(600, 600);
   particle = new ColorParticle();
   particleList = new ArrayList<Particle>();
   frameRate(10);
-  cam = new PeasyCam(this, 500);
 }
 
 void draw() {
 
  addParticle();
- 
-  for (Particle p : particleList) {
-    p.update();
-    p.display();
-  }
 
   for (int i = 0; i < particleList.size()-1; i++) {
     particle = particleList.get(i);
     particle.update();
     particle.display();
-    if (particle.location.y > height){
-      
+    if (particle.location.y > height){    
+      particleList.remove(particle);
     }
   }
 
 }
 
 void addParticle() {
-  particleList.add(new ColorParticle());
   particleList.add(new RectangleParticle());
 }
 
@@ -50,5 +43,5 @@ void mousePressed(){
 }
 
 void mouseReleased(){
-  fill(0,0,0);
+  fill(255);
 }
